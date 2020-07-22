@@ -1,0 +1,22 @@
+<div class="text-center" style="width: 350px; height:300px; margin-top: 5%; margin-left: 35%">
+    <img class="mr-3" src="https://www.passerellesnumeriques.org/wp-content/uploads/2016/03/pn-logo.png" style="width:80px; height:80px">
+    <br>
+    <br>
+    <h4 style="margin-top: 0%; font-family: fantasy ">LOGIN</h4>
+    <br>
+    <div class="jumbotron pb-5" style="border-top: orange solid 10px; border-bottom: #00cccc solid 10px">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username" name="username"
+                    class="form-control">
+            </div>
+            <br>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Password" [(ngModel)]="password" name="password"
+                    class="form-control">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-secondary">Login</button>
+        </form>
+    </div>
+</div>

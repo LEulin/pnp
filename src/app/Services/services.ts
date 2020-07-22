@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Event, Participant } from '../Services/data_models';
+import { Event, UserAccount } from '../Services/data_models';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject,} from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable()
 export class Services {
-
   event: Event;
-  events: Observable<Event[]>
-  private eventDoc: AngularFirestoreDocument<Event>
-  private eventCollection: AngularFirestoreCollection<Event>
-  fEvent: Observable<Event[]>
+  events: Observable<Event[]>;
+  private eventDoc: AngularFirestoreDocument<Event>;
+  private eventCollection: AngularFirestoreCollection<Event>;
+  fEvent: Observable<Event[]>;
+
+  userAccount =  new BehaviorSubject<UserAccount>({username: '', password: ''})
+  currentUserAccount = this.userAccount.asObservable()
 
   constructor(private angular: AngularFirestore) {
     this.eventCollection = angular.collection<Event>('events', ref => ref.orderBy('id', 'asc'))
@@ -26,6 +28,17 @@ export class Services {
 
   getEvents() {
     return this.events;
+
+  }
+
+  deleteEvent(data) {
+    this.eventCollection.ref.where('id', '==', data).get()
+      .then(res => {
+        res.forEach(doc => {
+          this.eventDoc = this.angular.doc<Event>('events/' + doc.id)
+          this.eventDoc.delete()
+        });
+      })
   }
 
   updateEvent(event: Event) {
@@ -44,5 +57,32 @@ export class Services {
       return this.eventCollection.add(event)
     })
   }
+
+
+  editEvent(editedEvent: Event) {
+    this.eventCollection.ref.where('id', '==', editedEvent.id).get()
+      .then(res => {
+        res.forEach(doc => {
+          this.eventDoc = this.angular.doc<Event>('events/' + doc.id)
+          this.eventDoc.update(editedEvent)
+        });
+      })
+  }
+
+  updateCurrentUser(userAccount: UserAccount){
+    this.userAccount.next(userAccount);
+  }
+
+  async getEvent(id: number): Promise<Event>{
+    let event: Event;
+    await this.eventCollection.ref.where('id', '==', Number(id))
+    .get().then(querySnapshot =>{
+      querySnapshot.forEach(doc => {
+        event = doc.data() as Event;
+      })
+    })
+    return event; 
+  }
 }
+
 

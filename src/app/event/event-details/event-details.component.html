@@ -1,20 +1,42 @@
-<h2>Event Title : {{event?.name}}</h2>
-<div class="body-content" >
-  <div class="row ml-1">
-    <span><b> Category : </b>{{event?.category}}</span>
-  </div>
+<app-header></app-header>
+<div class="container">
+  <div *ngIf="event" class="jumbotron pointable">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2>Event Title : {{event?.name}}</h2>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn" type="button" (click)="viewList()"><i class="fa fa-eye"></i>&nbsp;View
+            Event List </button>
+        </div>
+      </div>
+    </div>
+    <div class="body-content">
+      <div class="row ml-1">
+        <span><b> Category : </b>{{event?.category}}</span>
+      </div>
 
-  <div class="row ml-1" *ngIf="event.speaker">
-    <span><b> Speaker : </b>{{event?.speaker}}</span>
-  </div>
+      <div class="row ml-1" *ngIf="event?.speaker">
+        <span><b> Speaker : </b>{{event?.speaker}}</span>
+      </div>
 
-  <div class="row ml-1" *ngIf="event.emcee">
-    <span><b> Emcee : </b>{{event?.emcee}}</span>
+      <div class="row ml-1" *ngIf="event?.emcee">
+        <span><b> Emcee : </b>{{event?.emcee}}</span>
+      </div>
+      <div class="row ml-1">
+        <span><b> Time : </b>{{event?.time}}</span>
+      </div>
+      <div class="row ml-1">
+        <span><b> Date : </b>{{event?.date}}</span>
+      </div>
+      <div class="row ml-1">
+        <span><b> Description : </b>{{event?.description}}</span>
+      </div>
+      <app-participants-list [participants]="event?.participants" (addparticipantevent)="addParticipant($event)"></app-participants-list>
+    </div>
   </div>
-  <div class="row ml-1">
-    <span><b> Time : </b>{{event?.time}}</span>
-  </div>
-  <br>
-  <button class="btn" style="background-color:#008000; color:white" type="submit" (click)="sendId(event.id)">View
-    Details</button>
+</div>
+<div *ngIf="!event" class="container jumbotron pointable text-center">
+  <div class="spinner-border text-primary"></div>
 </div>

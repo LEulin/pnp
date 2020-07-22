@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 // import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap'
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-addevent',
@@ -8,14 +9,13 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./addevent.component.scss']
 })
 export class AddeventComponent implements OnInit {
-  // modalOption: NgbModalOptions = {};
   @Output() event = new EventEmitter()
   eventForm: FormGroup;
   submitted = false
   modal = false
 
   constructor(
-    private formbuilder: FormBuilder,
+    private formbuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +40,13 @@ export class AddeventComponent implements OnInit {
 
 
   submitForm(data) {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Event successfully added!',
+      showConfirmButton: false,
+      timer: 1500
+    })
     this.modal = false
     this.submitted = true
     this.event.emit(data)

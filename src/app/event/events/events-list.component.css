@@ -1,0 +1,29 @@
+.body-content{
+    font-size: 25px
+}
+
+event-list{
+    padding: 15px;
+
+}
+.jumbotron{
+    border-top: orange solid 8px;
+    border-bottom: #00cccc solid 8px
+}
+
+#addEventBtn{
+    background-color: #00b3b3; 
+    float:right;
+    color:white
+}
+
+.modal-content{
+    border-top: orange solid 10px;
+    border-bottom: #00cccc solid 10px
+}
+
+.btn{
+    background-color:#004d99;
+    color:white;
+    float:right
+}

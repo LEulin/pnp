@@ -1,0 +1,19 @@
+.body-content{
+    font-size: 15px;
+    padding-left: center;
+}
+
+.spinner-border{
+    display: flexbox;
+    align-self: center;
+}
+
+.btn{
+    background-color: #00cccc;
+     color:white; 
+     float: right;
+}
+
+.h2{
+    color: #00cccc;
+}

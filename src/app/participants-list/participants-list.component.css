@@ -1,0 +1,32 @@
+.not_found{
+    margin-top: 3%
+}
+
+.participants-list{
+    padding-top: 50px;
+}
+
+#btn1{
+    background-color:#b30000; 
+    color:white
+}
+
+#btn2{
+    background-color:#008000;
+    color:white
+}
+
+#btn3{
+    background-color: #008000; 
+    color:white
+}
+
+.modal-content{
+    border-top: orange solid 10px; 
+    border-bottom: #00cccc solid 10px
+}
+
+#table{
+    border-top: orange solid 9px;
+    border-bottom: #00cccc solid 9px
+}
